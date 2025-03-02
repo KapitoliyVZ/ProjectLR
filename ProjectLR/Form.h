@@ -1,4 +1,4 @@
-
+#include "VersionLinkGit.h"
 #pragma once
 
 
@@ -45,6 +45,13 @@ namespace ProjectLR {
 	private: System::Windows::Forms::ToolStripMenuItem^ âåðñèÿÏðîãðàììûToolStripMenuItem;
 	private: System::ComponentModel::BackgroundWorker^ backgroundWorker1;
 	private: System::DirectoryServices::DirectoryEntry^ directoryEntry1;
+	private: System::Windows::Forms::Button^ button_Open_Text;
+
+
+
+
+
+
 
 
 
@@ -77,6 +84,7 @@ namespace ProjectLR {
 			this->âûõîäToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
 			this->directoryEntry1 = (gcnew System::DirectoryServices::DirectoryEntry());
+			this->button_Open_Text = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -86,7 +94,7 @@ namespace ProjectLR {
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->ôàéëToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(683, 28);
+			this->menuStrip1->Size = System::Drawing::Size(1072, 28);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -99,7 +107,6 @@ namespace ProjectLR {
 			this->ôàéëToolStripMenuItem->Name = L"ôàéëToolStripMenuItem";
 			this->ôàéëToolStripMenuItem->Size = System::Drawing::Size(59, 24);
 			this->ôàéëToolStripMenuItem->Text = L"Ôàéë";
-			this->ôàéëToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::ôàéëToolStripMenuItem_Click);
 			// 
 			// ñâåäåíèÿToolStripMenuItem
 			// 
@@ -116,12 +123,14 @@ namespace ProjectLR {
 			this->îÐàçðàáîò÷èêàõToolStripMenuItem->Name = L"îÐàçðàáîò÷èêàõToolStripMenuItem";
 			this->îÐàçðàáîò÷èêàõToolStripMenuItem->Size = System::Drawing::Size(229, 26);
 			this->îÐàçðàáîò÷èêàõToolStripMenuItem->Text = L"Ðàçðàáîò÷èêè";
+			this->îÐàçðàáîò÷èêàõToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::îÐàçðàáîò÷èêàõToolStripMenuItem_Click);
 			// 
 			// âåðñèÿÏðîãðàììûToolStripMenuItem
 			// 
 			this->âåðñèÿÏðîãðàììûToolStripMenuItem->Name = L"âåðñèÿÏðîãðàììûToolStripMenuItem";
 			this->âåðñèÿÏðîãðàììûToolStripMenuItem->Size = System::Drawing::Size(229, 26);
 			this->âåðñèÿÏðîãðàììûToolStripMenuItem->Text = L"Âåðñèÿ ïðîãðàììû";
+			this->âåðñèÿÏðîãðàììûToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::âåðñèÿÏðîãðàììûToolStripMenuItem_Click);
 			// 
 			// âûõîäToolStripMenuItem
 			// 
@@ -130,11 +139,22 @@ namespace ProjectLR {
 			this->âûõîäToolStripMenuItem->Text = L"Âûõîä";
 			this->âûõîäToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::âûõîäToolStripMenuItem_Click);
 			// 
+			// button_Open_Text
+			// 
+			this->button_Open_Text->Location = System::Drawing::Point(61, 100);
+			this->button_Open_Text->Name = L"button_Open_Text";
+			this->button_Open_Text->Size = System::Drawing::Size(175, 51);
+			this->button_Open_Text->TabIndex = 1;
+			this->button_Open_Text->Text = L"Âûáðàòü è îòêðûòü ôàéë òåêñòà";
+			this->button_Open_Text->UseVisualStyleBackColor = true;
+			this->button_Open_Text->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(683, 392);
+			this->ClientSize = System::Drawing::Size(1072, 579);
+			this->Controls->Add(this->button_Open_Text);
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"MyForm";
@@ -148,7 +168,7 @@ namespace ProjectLR {
 #pragma endregion
 
 	private: System::Void âûõîäToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-		
+
 		// Îòîáðàæåíèå äèàëîãîâîãî îêíà ñ ïîäòâåðæäåíèåì âûõîäà
 		System::Windows::Forms::DialogResult result = MessageBox::Show(
 			L"Âû óâåðåíû, ÷òî õîòèòå âûéòè?", // Òåêñò ñîîáùåíèÿ
@@ -164,7 +184,57 @@ namespace ProjectLR {
 		}
 
 	}
-	private: System::Void ôàéëToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	private: System::Void îÐàçðàáîò÷èêàõToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Ñîçäàíèå ôîðìû äëÿ îòîáðàæåíèÿ èíôîðìàöèè î ðàçðàáîò÷èêàõ  
+		System::Windows::Forms::Form^ infoForm = gcnew System::Windows::Forms::Form();
+		infoForm->Text = L"Î ðàçðàáîò÷èêàõ";
+		infoForm->Size = System::Drawing::Size(600, 300);
+
+		// Ñîçäàíèå òåêñòîâîãî ïîëÿ äëÿ îòîáðàæåíèÿ ñîäåðæèìîãî ôàéëà  
+		System::Windows::Forms::TextBox^ textBox = gcnew System::Windows::Forms::TextBox();
+		textBox->Multiline = true;
+		textBox->Dock = System::Windows::Forms::DockStyle::Fill;
+		textBox->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
+
+		// ×òåíèå ñîäåðæèìîãî ôàéëà è âûâîä åãî â òåêñòîâîå ïîëå  
+		try {
+			System::IO::StreamReader^ sr = gcnew System::IO::StreamReader("people.txt");
+			textBox->Text = sr->ReadToEnd();
+			sr->Close();
+		}
+		catch (System::IO::FileNotFoundException^) {
+			textBox->Text = L"Ôàéë people.txt íå íàéäåí.";
+		}
+		catch (System::Exception^ ex) {
+			textBox->Text = L"Îøèáêà ïðè ÷òåíèè ôàéëà: " + ex->Message;
+		}
+
+		infoForm->Controls->Add(textBox);
+		infoForm->ShowDialog();
+	};
+
+	private: System::Void âåðñèÿÏðîãðàììûToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Ñîçäàåì è îòîáðàæàåì ôîðìó ñ èíôîðìàöèåé î âåðñèè
+		VersionForm^ versionForm = gcnew VersionForm();
+		versionForm->ShowDialog(); // Îòêðûâàåì ôîðìó êàê äèàëîãîâîå îêíî
 	}
-};
+
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		// Ñîçäàåì äèàëîãîâîå îêíî äëÿ âûáîðà ôàéëà
+		OpenFileDialog^ openFileDialog = gcnew OpenFileDialog();
+		openFileDialog->Filter = "Òåêñòîâûå ôàéëû|*.txt|Âñå ôàéëû|*.*";
+		openFileDialog->Title = "Âûáåðèòå ôàéë äëÿ îòêðûòèÿ";
+		// Åñëè ïîëüçîâàòåëü âûáðàë ôàéë è íàæàë "ÎÊ"
+		if (openFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+		{
+			// Îòêðûâàåì ôàéë äëÿ ÷òåíèÿ
+			System::IO::StreamReader^ sr = gcnew System::IO::StreamReader(openFileDialog->FileName);
+			// ×èòàåì âåñü ôàéë è âûâîäèì åãî â òåêñòîâîå ïîëå
+			MessageBox::Show(sr->ReadToEnd(), "Ñîäåðæèìîå ôàéëà");
+			sr->Close();
+		}
+	}
+	};
 }

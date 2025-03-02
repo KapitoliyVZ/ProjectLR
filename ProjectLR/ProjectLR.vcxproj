@@ -126,6 +126,7 @@
     <ClInclude Include="Form.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="VersionLinkGit.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form.resx">
